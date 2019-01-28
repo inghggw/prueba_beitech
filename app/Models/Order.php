@@ -39,7 +39,7 @@ class Order extends Model
      */
     public function customer()
     {
-        return $this->belongsTo('App\Models\Customer', null, 'customer_id');
+        return $this->belongsTo('App\Models\Customer', 'customer_id', 'customer_id');
     }
 
     /**
@@ -47,6 +47,6 @@ class Order extends Model
      */
     public function orderDetails()
     {
-        return $this->hasMany('App\Models\OrderDetail', null, 'order_id');
+        return $this->hasMany('App\Models\OrderDetail', 'order_id', 'order_id');
     }
 }

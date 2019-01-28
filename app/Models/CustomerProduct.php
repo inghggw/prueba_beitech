@@ -29,7 +29,7 @@ class CustomerProduct extends Model
      */
     public function customer()
     {
-        return $this->belongsTo('App\Models\Customer', null, 'customer_id');
+        return $this->belongsTo('App\Models\Customer', 'customer_id', 'customer_id');
     }
 
     /**
@@ -37,6 +37,6 @@ class CustomerProduct extends Model
      */
     public function product()
     {
-        return $this->belongsTo('App\Models\Product', null, 'product_id');
+        return $this->belongsTo('App\Models\Product', 'product_id', 'product_id');
     }
 }

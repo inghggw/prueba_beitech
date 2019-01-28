@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('customers', 'CustomerController@index')->name('listCustomer');
+Route::get('order/create/{id}', 'OrderController@create')->name('createOrder');
+Route::get('order/show/{id}', 'OrderController@show')->name('createOrder');

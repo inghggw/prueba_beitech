@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Customer List
+Route::post('customer/showTable', 'CustomerController@showTable')->name('customer.showTable');
+
+//Order List By Customer
+Route::post('orderCustomer/showTable/{id}', 'OrderController@orderCustomerShowTable')->name('orderCustomer.showTable');

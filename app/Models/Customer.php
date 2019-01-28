@@ -45,6 +45,6 @@ class Customer extends Model
      */
     public function orders()
     {
-        return $this->hasMany('App\Models\Order', null, 'customer_id');
+        return $this->hasMany('App\Models\Order', 'customer_id', 'customer_id');
     }
 }

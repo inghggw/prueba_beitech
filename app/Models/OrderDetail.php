@@ -38,6 +38,6 @@ class OrderDetail extends Model
      */
     public function order()
     {
-        return $this->belongsTo('App\Models\Order', null, 'order_id');
+        return $this->belongsTo('App\Models\Order', 'order_id', 'order_id');
     }
 }
