@@ -18,3 +18,6 @@ Route::post('customer/showTable', 'CustomerController@showTable')->name('custome
 
 //Order List By Customer
 Route::post('orderCustomer/showTable/{id}', 'OrderController@orderCustomerShowTable')->name('orderCustomer.showTable');
+
+//Order Store By Customer 
+Route::post('order/store', 'OrderController@store')->name('order.store');

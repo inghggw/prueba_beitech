@@ -17,10 +17,12 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/jquery.dataTables.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{asset('css/font-awesome.css')}}" rel="stylesheet">
+    <link href="{{asset('css/jquery.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/spop.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/multi-select.dist.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
     
     <!-- Propiedades globajes JS -->
     <script>
@@ -75,6 +77,8 @@
     <script src="{{asset('js/bootbox.min.js')}}"></script>
     <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('js/spop.min.js')}}"></script>
+    <script src="{{asset('js/jquery.multi-select.js')}}"></script>
     <script src="{{asset('js/funciones.js')}}"></script>
 </body>
 </html>

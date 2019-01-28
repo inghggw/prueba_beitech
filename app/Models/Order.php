@@ -34,6 +34,8 @@ class Order extends Model
      */
     protected $fillable = ['customer_id', 'creation_date', 'delivery_address', 'total'];
 
+    public $timestamps = false;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

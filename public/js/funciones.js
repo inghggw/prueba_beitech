@@ -1,6 +1,60 @@
 //Documento esté cargado totalmente
 $(function(){
 
+	/**
+	 * [AjaxForm: permite realizar un form con ajax GENERICO]
+	 * @param  <button type="submit" class="formAjax"> y esté dentro del <form class="form-ajax"></form>
+	 * @return [object r]{r.responseJSON}
+	 */
+	$(document).on("click",".formAjax",function(e){
+
+		/*Limpiar la class y div de error*/
+		$('.form-ajax *').removeClass('is-invalid');
+		$('.form-ajax .invalid-feedback').remove();
+		/*Bloquear boton ejecutado*/ 
+    	$(this).css('pointer-events', 'none');
+
+		$.ajax({
+			url: $('.form-ajax').attr('action'),
+			type: $('.form-ajax').attr('method'),			
+			data: $('.form-ajax').serialize()
+		})
+		.always(function(r) {
+			console.log(r);
+			/*Activar boton ejecutado*/
+	    	$('.formAjax').css('pointer-events', 'visible');
+	    	if(r.status==200){
+	    		outAjax(r);
+	    	}else if (r.status==422){
+	    		cargarError(r.responseJSON.errors);
+	    	}else{
+	    		msj='Ocurrió una interrupción, '
+				  +'por favor intente nuevamente.<br><br>'
+				  +'Si el problema persiste, '
+				  +'contacte a soporte técnico.';
+				bootbox.alert({title:'¡Atención!',message:msj});
+	    	}
+		});
+  	});
+
+  	/*Select Multiple(sm) Products*/
+   	$('#products').multiSelect({
+	  afterSelect: function(values){
+	  	var r = values[0].split('|');
+	  	var t = $('input[name="total"]').val();
+	  	var sum = parseInt(r[1])+parseInt(t);
+	  	$('input[name="total"]').val(sum);	    
+	  },
+	  afterDeselect: function(values){
+	  	var r = values[0].split('|');
+	  	var t = $('input[name="total"]').val();
+	  	var res = parseInt(t)-parseInt(r[1]);
+	  	$('input[name="total"]').val(res);
+	  }
+	});
+
+	//************************* DataTables *************************
+
 	//Table Customers
 	$('#tCustomers').DataTable({
 		responsive:true,
@@ -72,75 +126,38 @@ $(function(){
 		        	//Como row inicia desde 0, se le incrementa 1
 		            $(td).html(++row);
 		        }
-		    },
-		    {	//Celda mostrar detalles de la orden
-		        targets: 5,
-		        orderable:false,
-		        createdCell: function (td, cellData, rowData, row, col) {
-		        	//Como row inicia desde 0, se le incrementa 1
-		            //$(td).html(++row);
-		            console.log(td);
-		            console.log(cellData);
-		            console.log(rowData);
-		            console.log(row);
-		            console.log(col);
-		        }
 		    }
 	    ]
 	});
 	
 });
 
-function deleteFila(id){
-	//console.log(id);
-	//console.log(window.laravel.url);
-
-	bootbox.confirm({
-    message: "¿Está seguro de eliminar el registro?",
-    buttons: {
-        confirm: {
-            label: 'Si',
-            className: 'btn-danger'
-        },
-        cancel: {
-            label: 'No',
-            className: 'btn-info'
-        }
-    },
-	callback: function (result) {
-	        console.log(result);
-	        //Si oprime "si", devuelve true, entonces entra al if para hacer el ajax
-	        if(result){
-	        	$.ajax({
-					url:window.laravel.url+'/usuario/'+id,
-					type: 'POST',
-					data: {_token:window.laravel.token,
-						   _method:'DELETE'},
-				})
-				.done(function(res) {
-					console.log(res);//Ver en la consola lo que devuelve el metodo del controller consultado∫
-					console.log("Ajax ok.");
-					
-					//Si el status es TRUE, se eliminó correctamente
-					if(res.status){
-						/*APLICA PARA CUANDO NO SE UTILIZABA DATATABLE
-						$('#fila'+res.id).remove();*/
-
-						//Con DATATABLE, se debe recargar la tabla
-						$('#tUsuarios').DataTable().ajax.reload();
-					}else{
-						alert(res.msj);
-					}
-				}).fail(function(res) {
-					console.log("error:");
-					console.log(res);
-				});
-	        }
-	    }
-	});	
+/*Mostrar los errores de validación del formulario enviado*/
+function cargarError(errors){
+	spop({
+		template: 'Please, check the fields in red...',
+		group: 'submit-satus',
+		style: 'error',
+		autoclose: 3000
+	});
+	$.each(errors,function(name, val) {
+		//Agregar el mensaje de errores debajo de cada elemento del form
+		var msj = val[0].charAt(0).toUpperCase()+ val[0].slice(1);
+		var divMsj = '<div class="invalid-feedback">'+msj+'</div>'
+		$('.form-ajax [name*='+name+']').addClass('is-invalid');
+		$('.form-ajax [name*='+name+']').parent().append(divMsj);
+	});
 }
 
-/*FORMA SIN ESPERAR LA RESPUESTA DEL AJAX
-$('.remove').on('click',function(){
-		$(this).parents('tr').remove();
-})*/
+/*Salida del AjaxForm*/
+function outAjax(r){
+	if (r.out=='modalRedirect'){
+		bootbox.dialog({
+		    message: r.html,
+		    buttons: {ok: {label:'Ok',className:'btn-success',
+		    		  callback: function(){document.location = r.route;}}}
+		});		
+	}else if (r.out=='reload'){
+		document.location.reload();
+	}
+}

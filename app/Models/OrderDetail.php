@@ -33,6 +33,8 @@ class OrderDetail extends Model
      */
     protected $fillable = ['order_id', 'product_description', 'price', 'quantity'];
 
+    public $timestamps = false;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

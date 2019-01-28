@@ -6,7 +6,7 @@
   <h3 class="text-primary">
   	<a class="link" href="{{route('listCustomer')}}"><i class="fas fa-arrow-circle-left"></i></a> 
   	Show Orders by Customer</h3>
-  {{-- dd($customer) --}}
+  
 	<div class="form-inline mt-4 mb-4">
 		<div class="form-group">
 	      	<label for="txtName" class="my-1 mr-2">Customer Name</label>
@@ -14,7 +14,8 @@
 	    </div>
 	</div>
 
-	<table class="table table-striped" id="tOrderCustomer" data-route="{{route('orderCustomer.showTable',$customer->customer_id)}}">
+	<table class="table table-striped" id="tOrderCustomer" 
+			data-route="{{route('orderCustomer.showTable',$customer->customer_id)}}">
     <thead>
       <tr>
         <th>#</th>
