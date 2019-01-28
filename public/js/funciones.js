@@ -53,20 +53,6 @@ $(function(){
 	  }
 	});
 
-   	$('.datePickerMin').datepicker({uiLibrary:'bootstrap4',format:'yyyy-mm-dd'});
-
-	$('.datePicker').datepicker({ 
-		uiLibrary: 'bootstrap4',
-		format: 'yyyy-mm-dd',
-		change:function (e) {
-				if ($(this).val()!=''){
-					$('.datePickerMin').removeAttr('disabled placeholder')
-							.css('background-color','unset');
-			}
-		} 
- 	});
-	
-
 	//************************* DataTables *************************
 
 	//Table Customers
@@ -113,7 +99,7 @@ $(function(){
 	});
 
 	//Table Customers
-	$('#tOrderCustomer').DataTable({
+	var tOrderCustomer = $('#tOrderCustomer').DataTable({
 		responsive:true,
 		processing: true,
         serverSide: true,
@@ -142,6 +128,38 @@ $(function(){
 		        }
 		    }
 	    ]
+	});
+
+	//Datepicker
+   	var datePickerMin = $('.datePickerMin').datepicker({uiLibrary:'bootstrap4',format:'yyyy-mm-dd'});
+
+	$('.datePicker').datepicker({ 
+		uiLibrary: 'bootstrap4',
+		format: 'yyyy-mm-dd',
+		change:function (e) {
+				if ($(this).val()!=''){
+					datePickerMin.removeAttr('disabled placeholder')
+							.css('background-color','unset');
+			}
+		} 
+ 	});
+	
+	//Search dates datatables
+	$(document).on("click","#btnFilterDate",function(e){
+		var startDate = $('.datePicker').val();
+		var endDate = $('.datePickerMin').val();
+		if(startDate!='' && endDate!=''){
+		    tOrderCustomer.on('preXhr.dt',function(e,settings,data){
+				data.startDate = startDate;
+				data.endDate = endDate;
+			});
+			tOrderCustomer.draw();
+		}else{
+			spop({
+				template: 'Please, select the start and end date...',
+				group: 'submit-satus',style: 'error',autoclose: 3000
+			});
+		}		
 	});
 	
 });

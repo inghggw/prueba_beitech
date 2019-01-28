@@ -21,8 +21,8 @@
       <input class="form-control datePickerMin" id="txtEndDate" readonly disabled placeholder="First select a start date">
    </div>
    <div class="form-group col-md-2">
-      <label for="btnFiltraFecha" class="my-1 mr-1">&nbsp;</label>
-      <button type="button" class="form-control btn btn-primary" id="btnFiltraFecha">
+      <label for="btnFilterDate" class="my-1 mr-1">&nbsp;</label>
+      <button type="button" class="form-control btn btn-primary" id="btnFilterDate">
         <i class="fas fa-search"></i> Search...</button>
    </div>
 	</div>

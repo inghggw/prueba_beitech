@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Http\Requests\OrderReq;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -45,9 +46,14 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function orderCustomerShowTable($customer_id)
+    public function orderCustomerShowTable($customer_id,Request $req)
     {
         $model = Order::query()->with('orderDetails')->where('customer_id','=',$customer_id);
+
+        if ($req->startDate!=''&& $req->endDate!='') {
+            $model->whereBetween('creation_date', [$req->startDate, $req->endDate]);
+        }
+        
         return datatables()->eloquent($model)
                      ->addColumn('orderDetails', function (Order $order) {
                     return $order->orderDetails->map(function($details) {
