@@ -139,7 +139,13 @@ $(function(){
 		change:function (e) {
 				if ($(this).val()!=''){
 					datePickerMin.removeAttr('disabled placeholder')
-							.css('background-color','unset');
+									.css('background-color','unset')
+									.destroy().addClass('form-control datePickerMin');
+					var newDatePickerMin = $('.datePickerMin')
+											.datepicker({uiLibrary:'bootstrap4',
+														 format:'yyyy-mm-dd',
+														 minDate:$(this).val()});
+					
 			}
 		} 
  	});
@@ -160,6 +166,25 @@ $(function(){
 				group: 'submit-satus',style: 'error',autoclose: 3000
 			});
 		}		
+	});
+
+	//Reset filter search dates datatables
+	$(document).on("click","#btnReset",function(e){
+		$('.datePicker').val('');
+		$('.datePickerMin').val('')
+			.attr({'placeholder':'First select a start date',
+				   'disabled':'disabled'})
+			.css('background-color','#e9ecef');
+		tOrderCustomer.on('preXhr.dt',function(e,settings,data){
+				data.startDate = '';
+				data.endDate = '';
+			});
+		tOrderCustomer.draw();
+		spop({
+			template: 'The filter has been cleaned and the table has been recharged',
+			group: 'submit-satus',autoclose: 3000
+		});
+				
 	});
 	
 });

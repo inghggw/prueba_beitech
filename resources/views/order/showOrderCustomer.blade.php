@@ -12,11 +12,11 @@
 	   	<label for="txtName" class="my-1 mr-1">Customer Name</label>
 	   	<input class="form-control" type="text" placeholder="{{$customer->name}}" readonly id="txtName">
 	 </div>
-   <div class="form-group col-md-3">
+   <div class="form-group col-md-2">
       <label for="txtStartDate" class="my-1 mr-1">Start Date (Y-M-D)</label>
       <input class="form-control datePicker" id="txtStartDate" readonly>
    </div>
-   <div class="form-group col-md-3">
+   <div class="form-group col-md-2">
       <label for="txtEndDate" class="my-1 mr-1">End Date (Y-M-D)</label>
       <input class="form-control datePickerMin" id="txtEndDate" readonly disabled placeholder="First select a start date">
    </div>
@@ -24,6 +24,11 @@
       <label for="btnFilterDate" class="my-1 mr-1">&nbsp;</label>
       <button type="button" class="form-control btn btn-primary" id="btnFilterDate">
         <i class="fas fa-search"></i> Search...</button>
+   </div>
+   <div class="form-group col-md-2">
+      <label for="btnReset" class="my-1 mr-1">&nbsp;</label>
+      <button type="button" class="form-control btn btn-secondary" id="btnReset">
+        <i class="fas fa-undo"></i> Reset</button>
    </div>
 	</div>
 
