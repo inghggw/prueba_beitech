@@ -20,3 +20,6 @@ code {
 div#ms-products {
     width: 100%;
 }
+.datePicker{
+    background-color: unset !important;
+}

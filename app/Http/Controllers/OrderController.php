@@ -8,7 +8,6 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Http\Requests\OrderReq;
-use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -66,7 +65,6 @@ class OrderController extends Controller
      */
     public function store(OrderReq $req)
     {
-        Log::debug($req);
         $order = new Order;
         $order->customer_id = $req->customer_id;
         $order->creation_date = $req->creation_date;

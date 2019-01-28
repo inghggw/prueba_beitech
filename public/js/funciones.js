@@ -53,6 +53,20 @@ $(function(){
 	  }
 	});
 
+   	$('.datePickerMin').datepicker({uiLibrary:'bootstrap4',format:'yyyy-mm-dd'});
+
+	$('.datePicker').datepicker({ 
+		uiLibrary: 'bootstrap4',
+		format: 'yyyy-mm-dd',
+		change:function (e) {
+				if ($(this).val()!=''){
+					$('.datePickerMin').removeAttr('disabled placeholder')
+							.css('background-color','unset');
+			}
+		} 
+ 	});
+	
+
 	//************************* DataTables *************************
 
 	//Table Customers

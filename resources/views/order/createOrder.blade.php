@@ -17,8 +17,8 @@
                     <input type="text" class="form-control" placeholder="{{$customer->name}}" readonly />
                 </div>
                 <div class="col-md-4 form-group">
-                    <label class="control-label">Creation Date</label>
-                    <input type="date" class="form-control" name="creation_date">
+                    <label class="control-label">Creation Date (Y-M-D)</label>
+                    <input class="form-control datePicker" name="creation_date" readonly>
                 </div>
                 <div class="col-md-4 form-group">
                     <label class="control-label">Delivery Address</label>

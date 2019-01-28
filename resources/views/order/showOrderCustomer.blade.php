@@ -7,11 +7,24 @@
   	<a class="link" href="{{route('listCustomer')}}"><i class="fas fa-arrow-circle-left"></i></a> 
   	Show Orders by Customer</h3>
   
-	<div class="form-inline mt-4 mb-4">
-		<div class="form-group">
-	      	<label for="txtName" class="my-1 mr-2">Customer Name</label>
-	    	<input class="form-control" type="text" placeholder="{{$customer->name}}" readonly id="txtName">
-	    </div>
+	<div class="form-row mt-4 mb-4">
+		<div class="form-group col-md-4">
+	   	<label for="txtName" class="my-1 mr-1">Customer Name</label>
+	   	<input class="form-control" type="text" placeholder="{{$customer->name}}" readonly id="txtName">
+	 </div>
+   <div class="form-group col-md-3">
+      <label for="txtStartDate" class="my-1 mr-1">Start Date (Y-M-D)</label>
+      <input class="form-control datePicker" id="txtStartDate" readonly>
+   </div>
+   <div class="form-group col-md-3">
+      <label for="txtEndDate" class="my-1 mr-1">End Date (Y-M-D)</label>
+      <input class="form-control datePickerMin" id="txtEndDate" readonly disabled placeholder="First select a start date">
+   </div>
+   <div class="form-group col-md-2">
+      <label for="btnFiltraFecha" class="my-1 mr-1">&nbsp;</label>
+      <button type="button" class="form-control btn btn-primary" id="btnFiltraFecha">
+        <i class="fas fa-search"></i> Search...</button>
+   </div>
 	</div>
 
 	<table class="table table-striped" id="tOrderCustomer" 
@@ -20,10 +33,10 @@
       <tr>
         <th>#</th>
         <th>Creation Date</th>
-        <th>Order Id</th>
-        <th>Total</th>
-        <th>Delivery Address</th>
-        <th>Products</th>
+        <th data-hide="phone">Order Id</th>
+        <th >Total</th>
+        <th data-hide="phone,tablet">Delivery Address</th>
+        <th data-hide="phone">Products</th>
       </tr>
     </thead>
   </table>
