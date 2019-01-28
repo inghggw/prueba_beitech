@@ -137,7 +137,8 @@ $(function(){
 		uiLibrary: 'bootstrap4',
 		format: 'yyyy-mm-dd',
 		change:function (e) {
-				if ($(this).val()!=''){
+				console.log($('.datePickerMin').val());
+				if ($(this).val()!='' && $('.datePickerMin').val()!=undefined){
 					datePickerMin.removeAttr('disabled placeholder')
 									.css('background-color','unset')
 									.destroy().addClass('form-control datePickerMin');
